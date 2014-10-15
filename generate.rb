@@ -4,7 +4,8 @@ require 'json'
 
 # Remove existing docs (if any), download latest version and move into docset
 %x{
-  rm -rf UIKIT.docset/Contents/Resources/*
+  rm -rf UIKIT.docset/Contents/Resources
+  mkdir UIKIT.docset/Contents/Resources
   wget https://github.com/uikit/uikit/archive/master.zip -O uikit-master.zip
   unzip uikit-master.zip
   mkdir UIKIT.docset/Contents/Resources/Documents
