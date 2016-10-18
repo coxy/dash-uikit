@@ -5,17 +5,19 @@ require 'json'
 # Remove existing docs (if any), download latest version and move into docset
 %x{
   rm -rf UIKIT.docset/Contents/Resources
-  mkdir UIKIT.docset/Contents/Resources
+  mkdir -p UIKIT.docset/Contents/Resources
   wget https://github.com/uikit/uikit/archive/master.zip -O uikit-master.zip
   unzip uikit-master.zip
-  mkdir UIKIT.docset/Contents/Resources/Documents
-  mv uikit-master/* UIKit.docset/Contents/Resources/Documents/
+  mkdir -p UIKIT.docset/Contents/Resources/Documents
+  mv uikit-master/* UIKIT.docset/Contents/Resources/Documents/
   rm -rf uikit-master
   rm uikit-master.zip
 }
 
-resources_path = 'UIKit.docset/Contents/Resources'
+resources_path = 'UIKIT.docset/Contents/Resources'
 documents_path = "#{resources_path}/Documents"
+
+
 
 # init sqlite3 db
 db = SQLite3::Database.new("#{resources_path}/docSet.dsidx")
@@ -88,7 +90,7 @@ docs.each do |doc|
 end
 
 # tar it up
-%x{tar --exclude='.DS_Store' -cvzf UIKit.tgz UIKit.docset}
+%x{tar --exclude='.DS_Store' -cvzf UIKIT.tgz UIKIT.docset}
 
 # display version number
 puts "Done. Use this version in the docset.json file:"
